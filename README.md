@@ -5,5 +5,5 @@ For amphibian data used in the main text, see the Dryad data repository: doi:10.
 
 If you will be using this code, please cite this github repository: DOI:10.5281/zenodo.840132
 
-#######Please cite this work appropriately using:
-######## DiRenzo, Graziella; Grant, Evan; Longo, Ana; Che-Castaldo, Christian; Zamudio, Kelly; Lips, Karen. 2017.  Imperfect pathogen detection from non-invasive skin swabs biases disease inference. Methods in Ecology & Evolution.
+Please cite this work appropriately using:
+DiRenzo, Graziella; Grant, Evan; Longo, Ana; Che-Castaldo, Christian; Zamudio, Kelly; Lips, Karen. 2017.  Imperfect pathogen detection from non-invasive skin swabs biases disease inference. Methods in Ecology & Evolution.
