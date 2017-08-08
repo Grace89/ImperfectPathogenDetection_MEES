@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=48:00:00
+#PBS -N Sampling
+#PBS -o out.log
+#PBS -V
+
+# Make sure that you are in the job submission directory
+cd $PBS_O_WORKDIR
+
+for row in `seq 81 88`
+do
+
+Rscript --vanilla sampling_script_29_Mar.R $row
+
+done

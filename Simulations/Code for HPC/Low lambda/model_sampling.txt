@@ -1,0 +1,55 @@
+model{
+    
+    #------------ Prior
+    B1 ~ dnorm(0, 0.368)
+    B2 ~ dnorm(0, 0.368)
+    G1 ~ dnorm(0, 0.368)
+    G2 ~ dnorm(0, 0.368)
+
+    
+    sigma1 ~ dunif(0, 5)
+    tau1 <- 1 / (sigma1 * sigma1)
+
+    sigma2 ~ dunif(0, 5)
+    tau2 <- 1 / (sigma2 * sigma2)
+
+    sigma3 ~ dunif(0, 5)
+    tau3 <- 1 / (sigma3 * sigma3)
+    
+    psi ~ dunif(0, 1)
+    lambda ~ dunif(0, 10)
+    
+    #------------ Ecological Likelihood
+    
+    for(i in 1:n.ind){
+    
+    z[i] ~ dbern(psi)
+    
+    N[i] ~ dlnorm(log(lambda * z[i] + 0.001), tau1+0.001)
+    
+    for(j in 1:n.swab){
+    
+    m[i, j] ~ dlnorm(log(N[i] * w[i, j] + 0.001), tau2+0.001)
+    
+    p1.eff[i, j] <- p1[i, j] * z[i]
+    
+    w[i, j] ~ dbern(p1.eff[i, j])
+    logit(p1[i, j]) <- B1 + B2 * log(N[i] + 0.001)
+    
+    for(k in 1:n.PCR){
+    
+    x[i, j, k] ~ dlnorm(log(m[i, j] * y[i, j, k] + 0.001), tau3+0.001) 
+    
+    p.eff[i, j, k] <- p2[i, j, k] * w[i, j]
+    
+    y[i, j, k] ~ dbern(p.eff[i, j, k])
+    logit(p2[i, j, k]) <- G1 + G2 * log(m[i, j] + 0.001)
+    
+    }
+    
+    }
+    
+    }
+    
+  }
+
